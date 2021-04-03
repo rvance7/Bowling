@@ -1,8 +1,40 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    ViewData["SelectedType"] = Model.TeamCategory;
 }
 
+@model IndexViewModel
+
 <div class="text-center">
-    <h1 class="display-4">Testing</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1>Bowling Is Kool</h1>
+    <h2>@ViewData["SelectedType"]</h2>
+    
+    <div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>&nbsp; Name &nbsp;</th>
+                    <th>&nbsp; Address &nbsp;</th>
+                    <th>&nbsp; Phone Number &nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var x in Model.Bowlers)
+                {
+                    <tr>
+                        <td>@x.BowlerFirstName @x.BowlerMiddleInit @x.BowlerLastName</td>
+                        <td>
+                            @x.BowlerAddress, @x.BowlerCity, @x.BowlerState,
+                            @x.BowlerZip
+                        </td>
+                        <td>@x.BowlerPhoneNumber</td>
+                    </tr>
+                }
+                </tbody>
+        </table>
+    </div>
+     
 </div>
+<div page-info="@Model.PageNumberingInfo" page-url-teamName="@Model.TeamCategory"
+     page-class="btn" page-class-normal="btn-outline-dark"
+     page-class-selected="btn-primary" class="btn-group text-center" page-classes-enabled="true"></div>
